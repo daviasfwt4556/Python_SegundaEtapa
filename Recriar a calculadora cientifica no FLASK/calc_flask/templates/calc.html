@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Calculadora</h1>
+
+    <div id="calculator">
+        <form>
+            <input type="text" id="etapas" placeholder="0" readonly><br>
+            
+            <input type="button" value="1" onclick="adicionarNumero(1)">
+            <input type="button" value="2" onclick="adicionarNumero(2)">
+            <input type="button" value="3" onclick="adicionarNumero(3)">
+            <input type="button" value="+" onclick="definirOperacao('+')"><br>
+            
+            <input type="button" value="4" onclick="adicionarNumero(4)">
+            <input type="button" value="5" onclick="adicionarNumero(5)">
+            <input type="button" value="6" onclick="adicionarNumero(6)">
+            <input type="button" value="-" onclick="definirOperacao('-')"><br>
+            
+            <input type="button" value="7" onclick="adicionarNumero(7)">
+            <input type="button" value="8" onclick="adicionarNumero(8)">
+            <input type="button" value="9" onclick="adicionarNumero(9)">
+            <input type="button" value="*" onclick="definirOperacao('*')"><br>
+            
+            <input type="button" value="0" onclick="adicionarNumero(0)">
+            <input type="button" value="/" onclick="definirOperacao('/')">
+            <input type="button" value="=" id="resultadoBtn" onclick="calcular()">
+            <input type="button" value="C" onclick="limpar()">
+        </form>
+    </div>
+
+    <script>
+        var etapasInput = document.getElementById("etapas");
+        var etapas = "";
+
+        function adicionarNumero(numero) {
+            etapas += numero;
+            etapasInput.value = etapas;
+        }
+
+        function definirOperacao(operacao) {
+            etapas += " " + operacao + " ";
+            etapasInput.value = etapas;
+        }
+
+        function calcular() {
+            try {
+                etapas = eval(etapas).toString();
+                etapasInput.value = etapas;
+            } catch (error) {
+                etapasInput.value = 'Erro';
+            }
+        }
+
+        function limpar() {
+            etapas = "";
+            etapasInput.value = "";
+        }
+    </script>
+</body>
+</html>
+
